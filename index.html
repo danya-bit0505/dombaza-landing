@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Домбаза — товары для дома и ремонта</title>
+<meta name="description" content="Инструменты, сантехника, электрика и отделочные материалы с доставкой по всей России.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=PT+Sans:wght@400;700&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --concrete: #EAEAE4;
+    --concrete-dark: #DAD9D0;
+    --charcoal: #23262B;
+    --workwear-blue: #1C3A5E;
+    --workwear-blue-dark: #142A44;
+    --signal-orange: #EE6C2C;
+    --signal-orange-dark: #D4571C;
+    --steel: #8B9198;
+    --paper: #FFFFFF;
+
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'PT Sans', sans-serif;
+    --font-mono: 'PT Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--concrete);
+    color: var(--charcoal);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  img, svg{ display: block; max-width: 100%; }
+
+  a{ color: inherit; }
+
+  :focus-visible{
+    outline: 3px solid var(--signal-orange);
+    outline-offset: 2px;
+  }
+
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  h1, h2, h3{
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0;
+    color: var(--workwear-blue);
+  }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin: 0 0 10px;
+  }
+
+  .btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover{ transform: translateY(-2px); }
+  .btn-primary{
+    background: var(--signal-orange);
+    color: var(--paper);
+    box-shadow: 0 4px 0 var(--signal-orange-dark);
+  }
+  .btn-primary:hover{ box-shadow: 0 6px 0 var(--signal-orange-dark); }
+  .btn-primary:active{ transform: translateY(1px); box-shadow: 0 2px 0 var(--signal-orange-dark); }
+
+  /* ---------- Header ---------- */
+  .site-header{
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--concrete);
+    border-bottom: 3px solid var(--workwear-blue);
+  }
+  .site-header .wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .logo{
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--workwear-blue);
+  }
+  .logo span{ color: var(--signal-orange); }
+  .header-cta{ font-size: 0.85rem; padding: 10px 20px; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 72px 0 64px;
+    background:
+      repeating-linear-gradient(135deg, rgba(28,58,94,0.05) 0 2px, transparent 2px 26px);
+  }
+  .hero h1{
+    font-size: clamp(2.6rem, 7vw, 4.4rem);
+    line-height: 0.98;
+  }
+  .hero h1 em{
+    font-style: normal;
+    color: var(--signal-orange);
+  }
+  .hero-sub{
+    max-width: 46ch;
+    margin: 20px 0 32px;
+    font-size: 1.15rem;
+    color: var(--charcoal);
+  }
+
+  /* ---------- Section shell ---------- */
+  section{ padding: 64px 0; }
+  .section-head{ margin-bottom: 36px; max-width: 60ch; }
+  .section-head h2{ font-size: clamp(1.8rem, 4vw, 2.4rem); }
+
+  .band-blue{ background: var(--workwear-blue); color: var(--concrete); }
+  .band-blue h2, .band-blue .eyebrow{ color: var(--concrete); }
+  .band-blue .eyebrow{ opacity: 0.7; }
+
+  /* ---------- Categories: shelf tags ---------- */
+  .tags{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+  }
+  .tag{
+    position: relative;
+    background: var(--paper);
+    padding: 28px 24px 24px 34px;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 rgba(35,38,43,0.08);
+  }
+  .tag::before{
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 10px;
+    background: var(--signal-orange);
+    -webkit-mask-image: radial-gradient(circle 5px at 5px 24px, transparent 98%, black 100%);
+            mask-image: radial-gradient(circle 5px at 5px 24px, transparent 98%, black 100%);
+  }
+  .tag .icon{ width: 36px; height: 36px; color: var(--workwear-blue); margin-bottom: 14px; }
+  .tag h3{ font-size: 1.2rem; margin-bottom: 8px; color: var(--charcoal); }
+  .tag p{ margin: 0; color: var(--steel); font-size: 0.96rem; }
+
+  /* ---------- Why us ---------- */
+  .reasons{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 28px 32px;
+  }
+  .reason{ display: flex; gap: 14px; align-items: flex-start; }
+  .reason .icon{ width: 26px; height: 26px; flex-shrink: 0; color: var(--signal-orange); margin-top: 2px; }
+  .reason p{ margin: 0; }
+  .reason strong{ display: block; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.02em; font-size: 1.02rem; margin-bottom: 4px; }
+
+  /* ---------- Delivery: tape measure ---------- */
+  .delivery-panel{
+    background: var(--paper);
+    color: var(--charcoal);
+    border-radius: 4px;
+    padding: 36px 30px;
+  }
+  .tape{
+    position: relative;
+    padding-top: 8px;
+  }
+  .tape-track{
+    position: relative;
+    height: 64px;
+    background:
+      repeating-linear-gradient(90deg, var(--charcoal) 0 2px, transparent 2px 20px) bottom / 100% 18px no-repeat,
+      repeating-linear-gradient(90deg, var(--steel) 0 1px, transparent 1px 10px) bottom / 100% 10px no-repeat;
+    background-color: #F4F3EE;
+    border: 2px solid var(--charcoal);
+    border-radius: 3px;
+  }
+  .tape-stop{
+    position: absolute;
+    top: 6px;
+    transform: translateX(-50%);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--workwear-blue);
+    background: var(--paper);
+    color: var(--workwear-blue);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+  }
+  .tape-stop[aria-pressed="true"]{
+    background: var(--signal-orange);
+    border-color: var(--signal-orange-dark);
+    color: var(--paper);
+  }
+  .tape-stop:hover{ transform: translateX(-50%) scale(1.08); }
+  .tape-labels{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--steel);
+  }
+  .delivery-result{
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+    padding-top: 24px;
+    border-top: 2px dashed var(--concrete-dark);
+  }
+  .delivery-result .zone-name{
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    color: var(--workwear-blue);
+  }
+  .delivery-result .figures{ display: flex; gap: 28px; }
+  .delivery-result .figure-label{ font-size: 0.78rem; color: var(--steel); text-transform: uppercase; letter-spacing: 0.06em; }
+  .delivery-result .figure-value{ font-family: var(--font-mono); font-size: 1.4rem; color: var(--signal-orange); }
+
+  /* ---------- Form ---------- */
+  .form-panel{
+    background: var(--paper);
+    border-radius: 4px;
+    max-width: 640px;
+    padding: 40px 40px 32px;
+    position: relative;
+    box-shadow: 0 10px 0 -4px var(--concrete-dark);
+  }
+  .form-panel::before{
+    content: "";
+    position: absolute;
+    top: -1px; left: 24px; right: 24px;
+    height: 12px;
+    background:
+      radial-gradient(circle 6px at 12px 0, transparent 5px, var(--paper) 6px) top / 24px 12px repeat-x;
+  }
+  .field{ margin-bottom: 20px; }
+  .field label{
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--steel);
+    margin-bottom: 6px;
+  }
+  .field input, .field textarea{
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 12px 14px;
+    border: 2px solid var(--concrete-dark);
+    border-radius: 3px;
+    background: var(--concrete);
+    color: var(--charcoal);
+  }
+  .field input:focus, .field textarea:focus{
+    border-color: var(--workwear-blue);
+    background: var(--paper);
+  }
+  .field textarea{ resize: vertical; min-height: 88px; }
+  .form-note{ margin: 18px 0 0; font-size: 0.85rem; color: var(--steel); }
+
+  .confirm{
+    display: none;
+    background: var(--paper);
+    border-radius: 4px;
+    max-width: 640px;
+    padding: 40px;
+    border: 2px solid var(--workwear-blue);
+  }
+  .confirm.is-visible{ display: block; }
+  .confirm h3{ color: var(--workwear-blue); font-size: 1.4rem; margin-bottom: 10px; }
+  .confirm p{ margin: 0; color: var(--charcoal); }
+  .confirm .stamp{
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--signal-orange);
+    border: 2px solid var(--signal-orange);
+    border-radius: 3px;
+    padding: 4px 10px;
+    transform: rotate(-3deg);
+    margin-bottom: 16px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding: 32px 0;
+    border-top: 3px solid var(--workwear-blue);
+    font-size: 0.9rem;
+    color: var(--steel);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    justify-content: space-between;
+  }
+  footer .logo{ font-size: 1.1rem; }
+
+  @media (max-width: 640px){
+    .header-cta{ display: none; }
+    section{ padding: 48px 0; }
+    .form-panel, .confirm{ padding: 28px 22px; }
+    .delivery-panel{ padding: 26px 18px; }
+  }
+
+  /* Scroll reveal */
+  .reveal{ opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.is-visible{ opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="logo">Дом<span>база</span></div>
+    <a class="btn btn-primary header-cta" href="#order">Оставить заявку</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Всё для дома<br>и <em>ремонта</em></h1>
+    <p class="hero-sub">Инструмент, сантехника, электрика и отделочные материалы — с доставкой по всей России. Заходите, разбирайтесь, звоните.</p>
+    <a class="btn btn-primary" href="#order">Оставить заявку</a>
+  </div>
+</section>
+
+<section id="categories">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Что у нас есть</p>
+      <h2>Четыре категории, чтобы закрыть любой ремонт</h2>
+    </div>
+    <div class="tags">
+      <article class="tag reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14.5 3.5l6 6-2 2-1.2-1.2-2.6 2.6 1.4 1.4-2 2-1.4-1.4-6.2 6.2H4v-2.1l6.2-6.2-1.4-1.4 2-2 1.4 1.4 2.6-2.6L13.6 5.5l2-2z"/>
+        </svg>
+        <h3>Инструменты</h3>
+        <p>Ручной и электроинструмент — от отвёртки до перфоратора.</p>
+      </article>
+      <article class="tag reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 3v4M17 3v4M4 9h9a5 5 0 015 5v1M4 9v3a5 5 0 005 5h1"/>
+          <circle cx="10" cy="19" r="2"/>
+        </svg>
+        <h3>Сантехника</h3>
+        <p>Трубы, смесители и фитинги для водоснабжения и отопления.</p>
+      </article>
+      <article class="tag reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M13 2L4 14h7l-1 8 10-13h-7l0-7z"/>
+        </svg>
+        <h3>Электрика</h3>
+        <p>Кабель, розетки, автоматы и освещение для дома и офиса.</p>
+      </article>
+      <article class="tag reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 13c3-2 5-2 8 0s5 2 8 0M4 20h16"/>
+          <rect x="5" y="4" width="6" height="8" rx="1"/>
+        </svg>
+        <h3>Отделочные материалы</h3>
+        <p>Краска, плитка, ламинат и всё для чистовой отделки.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band-blue">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Почему выбирают Домбазу</p>
+      <h2>Работаем так, чтобы не пришлось выбирать ещё раз</h2>
+    </div>
+    <div class="reasons">
+      <div class="reason reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+        <p><strong>5 лет на рынке</strong>Знаем, что нужно для ремонта, и не советуем лишнего.</p>
+      </div>
+      <div class="reason reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+        <p><strong>Доставка за 1–2 дня</strong>По Москве и области — быстро, без ожидания неделями.</p>
+      </div>
+      <div class="reason reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+        <p><strong>Возврат без проблем</strong>Не подошло — вернём деньги, без лишних вопросов.</p>
+      </div>
+      <div class="reason reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+        <p><strong>Скидки постоянным клиентам</strong>Чем чаще заказываете, тем выгоднее цена.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="delivery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Доставка</p>
+      <h2>Выберите зону — узнайте цену и срок</h2>
+    </div>
+
+    <div class="delivery-panel reveal">
+      <div class="tape">
+        <div class="tape-track">
+          <button type="button" class="tape-stop" style="left: 10%"  data-zone="0" aria-pressed="false" aria-label="Москва и область">МСК</button>
+          <button type="button" class="tape-stop" style="left: 50%"  data-zone="1" aria-pressed="false" aria-label="Санкт-Петербург">СПБ</button>
+          <button type="button" class="tape-stop" style="left: 90%"  data-zone="2" aria-pressed="false" aria-label="Остальная Россия">РФ</button>
+        </div>
+        <div class="tape-labels">
+          <span>0 км</span>
+          <span>700 км</span>
+          <span>дальше по России</span>
+        </div>
+      </div>
+
+      <div class="delivery-result">
+        <div class="zone-name" id="zoneName">Москва и область</div>
+        <div class="figures">
+          <div>
+            <div class="figure-label">Цена</div>
+            <div class="figure-value" id="zonePrice">300 ₽</div>
+          </div>
+          <div>
+            <div class="figure-label">Срок</div>
+            <div class="figure-value" id="zoneDays">1–2 дня</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="order">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Оставить заявку</p>
+      <h2>Оставьте контакты — перезвоним и уточним детали</h2>
+    </div>
+
+    <form class="form-panel reveal" id="orderForm" novalidate>
+      <div class="field">
+        <label for="name">Имя</label>
+        <input type="text" id="name" name="name" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="phone">Телефон</label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+7 900 000-00-00" required>
+      </div>
+      <div class="field">
+        <label for="request">Что хотите заказать</label>
+        <textarea id="request" name="request" placeholder="Например: перфоратор и пачка дюбелей"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Отправить заявку</button>
+      <p class="form-note">Перезвоним в течение рабочего дня.</p>
+    </form>
+
+    <div class="confirm reveal" id="orderConfirm" role="status">
+      <div class="stamp">Заявка принята</div>
+      <h3>Спасибо, ждём вас снова на связи</h3>
+      <p>Мы перезвоним по указанному телефону в течение рабочего дня и уточним детали заказа.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; flex-wrap:wrap; gap:8px 24px; justify-content:space-between; width:100%;">
+    <div class="logo">Дом<span>база</span></div>
+    <div>© 2026 Домбаза · товары для дома и ремонта</div>
+  </div>
+</footer>
+
+<script>
+  // Данные по зонам доставки
+  var zones = [
+    { name: 'Москва и область', price: '300 ₽', days: '1–2 дня' },
+    { name: 'Санкт-Петербург',   price: '500 ₽', days: '2–3 дня' },
+    { name: 'Остальная Россия',  price: 'от 700 ₽', days: '3–7 дней' }
+  ];
+
+  var stops = document.querySelectorAll('.tape-stop');
+  var zoneName = document.getElementById('zoneName');
+  var zonePrice = document.getElementById('zonePrice');
+  var zoneDays = document.getElementById('zoneDays');
+
+  function selectZone(index){
+    var zone = zones[index];
+    zoneName.textContent = zone.name;
+    zonePrice.textContent = zone.price;
+    zoneDays.textContent = zone.days;
+    stops.forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.dataset.zone === String(index) ? 'true' : 'false');
+    });
+  }
+
+  stops.forEach(function(btn){
+    btn.addEventListener('click', function(){ selectZone(Number(btn.dataset.zone)); });
+  });
+  selectZone(0);
+
+  // Форма — только мокап-подтверждение, никакие данные никуда не отправляются.
+  // Реальную доставку заявок (email/Telegram/CRM) нужно подключать отдельно.
+  var form = document.getElementById('orderForm');
+  var confirmPanel = document.getElementById('orderConfirm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (!form.checkValidity()){
+      form.reportValidity();
+      return;
+    }
+    form.style.display = 'none';
+    confirmPanel.classList.add('is-visible');
+    confirmPanel.setAttribute('tabindex', '-1');
+    confirmPanel.focus();
+  });
+
+  // Плавное появление секций при скролле
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+</script>
+
+</body>
+</html>
