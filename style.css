@@ -222,7 +222,7 @@ section{ padding: 64px 0; }
 }
 .tape-track{
   position: relative;
-  height: 64px;
+  height: 68px;
   background:
     repeating-linear-gradient(90deg, var(--charcoal) 0 2px, transparent 2px 20px) bottom / 100% 18px no-repeat,
     repeating-linear-gradient(90deg, var(--steel) 0 1px, transparent 1px 10px) bottom / 100% 10px no-repeat;
@@ -234,7 +234,7 @@ section{ padding: 64px 0; }
   position: absolute;
   top: 6px;
   transform: translateX(-50%);
-  width: 40px; height: 40px;
+  width: 44px; height: 44px;
   border-radius: 50%;
   border: 2px solid var(--workwear-blue);
   background: var(--paper);
